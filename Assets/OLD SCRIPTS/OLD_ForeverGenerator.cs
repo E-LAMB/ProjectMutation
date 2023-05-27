@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class ForeverGenerator : MonoBehaviour
+/*
+public class OLD_ForeverGenerator : MonoBehaviour
 {
 
     public PylonNode my_pylon;
@@ -31,3 +31,4 @@ public class ForeverGenerator : MonoBehaviour
         }
     }
 }
+*/

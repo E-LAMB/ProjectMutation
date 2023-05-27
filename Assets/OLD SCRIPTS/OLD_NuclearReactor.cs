@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class NuclearReactor : MonoBehaviour
+/*
+public class OLD_NuclearReactor : MonoBehaviour
 {
 
     public PylonNode my_pylon;
@@ -45,4 +45,4 @@ public class NuclearReactor : MonoBehaviour
         }
     }
 }
-
+*/

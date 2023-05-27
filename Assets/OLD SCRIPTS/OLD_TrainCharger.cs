@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class ChargerNode : MonoBehaviour
+/*
+public class OLD_TrainCharger : MonoBehaviour
 {
 
-    public Drone my_drone;
-    public bool has_a_drone;
+    public Train my_train;
 
     public PylonNode my_pylon;
 
@@ -16,18 +15,6 @@ public class ChargerNode : MonoBehaviour
     public LineRenderer my_connector;
 
     public Transform my_orb;
-
-    void OnTriggerStay(Collider other)
-    {
-        if (!has_a_drone && other.gameObject.GetComponent<Drone>())
-        {
-            if (other.gameObject.GetComponent<Drone>().state == 2)
-            {
-                my_drone = other.gameObject.GetComponent<Drone>();
-                has_a_drone = true;
-            }
-        }
-    }
 
     void DrawPower()
     {
@@ -60,13 +47,12 @@ public class ChargerNode : MonoBehaviour
     {
         DrawPower();
 
-        if (has_a_drone)
+        if (my_train.accepting_charge)
         {
-
             my_connector.SetPosition(0,new Vector3(0f,0f,0f));
-            my_connector.SetPosition(1,my_drone.my_orb.position - my_orb.position);
+            my_connector.SetPosition(1,my_train.my_orb.position - my_orb.position);
 
-            float needed_power = my_drone.maximum_battery - my_drone.battery;
+            float needed_power = 25.5f - my_train.wait_time;
             needed_power = needed_power / 1.3f;
             needed_power = needed_power * Time.deltaTime;
 
@@ -75,22 +61,17 @@ public class ChargerNode : MonoBehaviour
                 needed_power = Mind.max_pylon_transfer;
             }
 
-            if (my_drone.battery >= 0f)
+            if (my_train.wait_time >= 0f)
             {
-                if (needed_power > my_drone.battery)
+                if (needed_power > 25.5f - my_train.wait_time)
                 {
-                    needed_power = my_drone.battery;
+                    needed_power = 25f - my_train.wait_time;
                 }
 
-                my_drone.battery += needed_power - (needed_power * (1f / Mind.pylon_power_loss));
+                my_train.wait_time += needed_power - (needed_power * (1f / Mind.pylon_power_loss));
                 internal_power_supply -= needed_power;
             }
 
-            if (my_drone.state != 2)
-            {
-                has_a_drone = false;
-                my_drone = null;
-            }
         } else
         {
             my_connector.SetPosition(0,new Vector3(0f,0f,0f));
@@ -98,3 +79,4 @@ public class ChargerNode : MonoBehaviour
         }
     }
 }
+*/

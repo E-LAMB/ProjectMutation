@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Well : MonoBehaviour
+/*
+public class OLD_Well : MonoBehaviour
 {
 
     public BuildingIdentity my_identity;
@@ -19,3 +19,4 @@ public class Well : MonoBehaviour
     }
 
 }
+*/

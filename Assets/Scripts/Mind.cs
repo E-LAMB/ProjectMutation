@@ -20,4 +20,7 @@ public static class Mind
     // How many drones are currently decommissioned (because of a dead battery)
     public static int drones_decommissioned_battery = 0;
 
+    // The system drones use to ID themselves on Startup
+    public static int drone_ID_startup = 0;
+
 }

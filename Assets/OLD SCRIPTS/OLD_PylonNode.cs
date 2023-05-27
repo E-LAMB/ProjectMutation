@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PylonNode : MonoBehaviour
+/*
+public class OLD_PylonNode : MonoBehaviour
 {
 
     public PylonNode connected_node;
@@ -107,3 +107,4 @@ public class PylonNode : MonoBehaviour
         }
     }
 }
+*/

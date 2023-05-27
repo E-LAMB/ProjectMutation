@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class CoalGenerator : MonoBehaviour
+/*
+public class OLD_CoalGenerator : MonoBehaviour
 {
 
     public PylonNode my_pylon;
@@ -43,3 +43,4 @@ public class CoalGenerator : MonoBehaviour
         }
     }
 }
+*/

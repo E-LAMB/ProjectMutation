@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class DroneScanner : MonoBehaviour
+/*
+public class OLD_DroneScanner : MonoBehaviour
 {
 
     public bool activated;
@@ -98,3 +98,4 @@ public class DroneScanner : MonoBehaviour
     }
 
 }
+*/
