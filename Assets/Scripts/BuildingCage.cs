@@ -55,11 +55,13 @@ public class BuildingCage : MonoBehaviour
             }
         }
 
+        /*
         if (waste_inside == waste_storage && waste_to_remove == 0)
         {
             waste_to_remove = waste_storage;
             order_submitted = my_orderer.AddOrder("OPER/CAGE", self, self, 3);
         }
+        */
 
 
     }
