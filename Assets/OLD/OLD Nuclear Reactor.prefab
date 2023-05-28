@@ -5269,7 +5269,7 @@ GameObject:
   - component: {fileID: 5286758164649882687}
   - component: {fileID: 5286758164649882675}
   m_Layer: 0
-  m_Name: Nuclear Reactor
+  m_Name: OLD Nuclear Reactor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

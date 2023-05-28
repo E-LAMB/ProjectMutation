@@ -8,10 +8,10 @@ public class OrderFormat
     
     public string order_code;
 
-    // OPER/MINE/5f             Operate a Mine (takes five seconds)
-    // OPER/CAGE/15f            Operate a Cage (takes sixteen seconds)
-    // OPER/WELL/5f             Operate a Well (takes five seconds)
-    // OPER/KITCH/10f           Operate a Kitchen (takes ten seconds)
+    // OPER/MINE                Operate a Mine (takes five seconds)
+    // OPER/CAGE                Operate a Cage (takes 2 seconds per waste)
+    // OPER/WELL                Operate a Well (takes five seconds)
+    // OPER/KITCH               Operate a Kitchen (takes ten seconds)
 
     // MAIN/PANE                Maintain a Solar Panel
     // MAIN/HARV                Maintain a Harvester
@@ -32,6 +32,7 @@ public class OrderFormat
     // HAUL/FOOD/HOUS           Haul Food to a House
 
     // HAUL/RADO/STAT           Haul Radioactive Ore to a Station Loader
+    // HAUL/RADO/REAC           Haul Water to a Nuclear Reactor
 
     // HAUL/WAST/CAGE           Haul Nuclear Waste to a Cage
 
@@ -53,5 +54,13 @@ public class OrderFormat
     // ASSI        - Assigned
     // COMP        - Completed
     // INPR        - In Progress
+
+    public OrderFormat(string order_code, GameObject order_origin, GameObject secondary_object, string order_status)
+    {
+        this.order_code = order_code;
+        this.order_origin = order_origin;
+        this.secondary_object = secondary_object;
+        this.order_status = order_status;
+    }
 
 }

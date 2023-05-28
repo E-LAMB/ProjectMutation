@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 114535391858427570}
   - component: {fileID: 114535391858427573}
   - component: {fileID: 114535391858427572}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 114535392338579007}
   - component: {fileID: 114535392338579006}
   - component: {fileID: 114535392338578994}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Drone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,14 +195,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   able_to_select: 0
   my_place: 0
+  stage: 0
   self: {fileID: 114535392338579002}
+  agent: {fileID: 114535392338579005}
   my_battery: 60
   my_orderer: {fileID: 0}
-  my_order:
-    order_code: 
-    order_origin: {fileID: 0}
-    secondary_object: {fileID: 0}
-    order_status: 
+  mine_ordercode: 
+  mine_primary: {fileID: 0}
+  mine_secondary: {fileID: 0}
+  mine_status: 
+  objective_distance: 0
+  item_in_hand: 
+  items:
+  - {fileID: 7586699042290665905}
+  - {fileID: 702517281044998677}
+  - {fileID: 1155438343347149431}
+  - {fileID: 2157897219059339870}
+  open_hand: {fileID: 416841159223291561}
+  close_hand: {fileID: 8478968208890797081}
 --- !u!1 &114535392681095514
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +225,7 @@ GameObject:
   - component: {fileID: 114535392681095590}
   - component: {fileID: 114535392681095513}
   - component: {fileID: 114535392681095512}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +320,7 @@ GameObject:
   - component: {fileID: 114535392837901029}
   - component: {fileID: 114535392837901028}
   - component: {fileID: 114535392837901031}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -405,7 +415,7 @@ GameObject:
   - component: {fileID: 114535392866807891}
   - component: {fileID: 114535392866807890}
   - component: {fileID: 114535392866807893}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +510,7 @@ GameObject:
   - component: {fileID: 114535393304106570}
   - component: {fileID: 114535393304106573}
   - component: {fileID: 114535393304106572}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,7 +605,7 @@ GameObject:
   - component: {fileID: 5210354970843467282}
   - component: {fileID: 8139468601979147600}
   - component: {fileID: 7256050069111556377}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Open Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -687,7 +697,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3763534581506671964}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hand Idle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -722,8 +732,8 @@ GameObject:
   - component: {fileID: 8086755339447464934}
   - component: {fileID: 1026613697251290016}
   - component: {fileID: 1712009287473581033}
-  m_Layer: 0
-  m_Name: Radioactive
+  m_Layer: 7
+  m_Name: Radioactive Ore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -817,7 +827,7 @@ GameObject:
   - component: {fileID: 1049526199911434455}
   - component: {fileID: 2710451654311354434}
   - component: {fileID: 958486714944823884}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -913,7 +923,7 @@ GameObject:
   - component: {fileID: 4910641642100906342}
   - component: {fileID: 7277056179096676550}
   - component: {fileID: 2523052393038164595}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Open Hand (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -996,6 +1006,102 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2157897219059339870
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1652424038211197461}
+  - component: {fileID: 1557616844037018124}
+  - component: {fileID: 4819558321400999102}
+  - component: {fileID: 2683990872228443602}
+  m_Layer: 0
+  m_Name: Waste
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1652424038211197461
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2157897219059339870}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.049999997, z: 0.1}
+  m_Children: []
+  m_Father: {fileID: 8130255102877167982}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1557616844037018124
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2157897219059339870}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &4819558321400999102
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2157897219059339870}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 00562c2dca2098b45ae24b43ec3a8881, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2683990872228443602
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2157897219059339870}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &5120822432073517536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,7 +1114,7 @@ GameObject:
   - component: {fileID: 6781897473283155503}
   - component: {fileID: 2498940252562159236}
   - component: {fileID: 1860144130368215780}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1100,7 +1206,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7997071593798220642}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1141,7 +1247,7 @@ GameObject:
   - component: {fileID: 114733867872240850}
   - component: {fileID: 7529781392279186235}
   - component: {fileID: 6699904356893234638}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Open Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1236,7 +1342,7 @@ GameObject:
   - component: {fileID: 4218811449601169925}
   - component: {fileID: 2292443179334753679}
   - component: {fileID: 7321363761904230365}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Open Hand (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1331,7 +1437,7 @@ GameObject:
   - component: {fileID: 7332822721329013558}
   - component: {fileID: 983882615540250898}
   - component: {fileID: 1947968350323384692}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Coal Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1426,7 +1532,7 @@ GameObject:
   - component: {fileID: 4692466120962603611}
   - component: {fileID: 1645746079947261824}
   - component: {fileID: 7053844383427178889}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1518,7 +1624,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5091447211882749601}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hand Grab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1550,7 +1656,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8130255102877167982}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hand Items
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1573,6 +1679,7 @@ Transform:
   - {fileID: 5445040092752538840}
   - {fileID: 1896832652017114200}
   - {fileID: 7454867447298714674}
+  - {fileID: 1652424038211197461}
   m_Father: {fileID: 7997071593798220642}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

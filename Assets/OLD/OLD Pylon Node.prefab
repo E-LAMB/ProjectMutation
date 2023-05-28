@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 1226280329734962489}
   - component: {fileID: 1226280329734962470}
   m_Layer: 0
-  m_Name: Pylon Node
+  m_Name: OLD Pylon Node
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

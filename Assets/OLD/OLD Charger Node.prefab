@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 1688234930182962727}
   - component: {fileID: 1688234930182962721}
   m_Layer: 0
-  m_Name: Charger Node
+  m_Name: OLD Charger Node
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

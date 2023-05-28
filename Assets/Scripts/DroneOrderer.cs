@@ -6,9 +6,23 @@ public class DroneOrderer : MonoBehaviour
 {
 
     // Orders ranked by Priority (1 being most important)
-    public OrderFormat[] order_1;
-    public OrderFormat[] order_2;
-    public OrderFormat[] order_3;
+
+    public string[] order1_ordercode;
+    public GameObject[] order1_primary;
+    public GameObject[] order1_secondary;
+    public string[] order1_status;
+
+    public string[] order2_ordercode;
+    public GameObject[] order2_primary;
+    public GameObject[] order2_secondary;
+    public string[] order2_status;
+
+    public string[] order3_ordercode;
+    public GameObject[] order3_primary;
+    public GameObject[] order3_secondary;
+    public string[] order3_status;
+
+    // ------------------------------------------------ //
 
     public OrderFormat list_used;
 
@@ -18,7 +32,10 @@ public class DroneOrderer : MonoBehaviour
     public int selected_orderlist_2;
     public int selected_orderlist_3;
 
-    public OrderFormat current_order;
+    public string current_ordercode;
+    public GameObject current_primary;
+    public GameObject current_secondary;
+    public string current_status;
     
     public int avaliable_bots;
     public GameObject[] bot_list;
@@ -28,92 +45,106 @@ public class DroneOrderer : MonoBehaviour
 
     public bool assigned_order;
 
+    public OrderFormat order;
+
+    int scroller;
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    public void AddOrder(OrderFormat order, int priority)
+    public bool AddOrder(string submit_ordercode, GameObject submit_primary, GameObject submit_secondary, int priority)
     {
-        current_orderlist = 1; 
-        selected_orderlist_1 = 0;
-        selected_orderlist_2 = 0;
-        selected_orderlist_3 = 0;
 
         assigned_order = false;
+        scroller = 0;
 
         if (priority == 1)
         {
-            if (!assigned_order && order_1[00].order_status != "PEND") {order_1[00] = order; assigned_order = true;}
-            if (!assigned_order && order_1[01].order_status != "PEND") {order_1[01] = order; assigned_order = true;}
-            if (!assigned_order && order_1[02].order_status != "PEND") {order_1[02] = order; assigned_order = true;}
-            if (!assigned_order && order_1[03].order_status != "PEND") {order_1[03] = order; assigned_order = true;}
-            if (!assigned_order && order_1[04].order_status != "PEND") {order_1[04] = order; assigned_order = true;}
-            if (!assigned_order && order_1[05].order_status != "PEND") {order_1[05] = order; assigned_order = true;}
-            if (!assigned_order && order_1[06].order_status != "PEND") {order_1[06] = order; assigned_order = true;}
-            if (!assigned_order && order_1[07].order_status != "PEND") {order_1[07] = order; assigned_order = true;}
-            if (!assigned_order && order_1[08].order_status != "PEND") {order_1[08] = order; assigned_order = true;}
-            if (!assigned_order && order_1[09].order_status != "PEND") {order_1[09] = order; assigned_order = true;}
-            if (!assigned_order && order_1[10].order_status != "PEND") {order_1[10] = order; assigned_order = true;}
-            if (!assigned_order && order_1[11].order_status != "PEND") {order_1[11] = order; assigned_order = true;}
-            if (!assigned_order && order_1[12].order_status != "PEND") {order_1[12] = order; assigned_order = true;}
-            if (!assigned_order && order_1[13].order_status != "PEND") {order_1[13] = order; assigned_order = true;}
-            if (!assigned_order && order_1[14].order_status != "PEND") {order_1[14] = order; assigned_order = true;}
-            if (!assigned_order && order_1[15].order_status != "PEND") {order_1[15] = order; assigned_order = true;}
-            if (!assigned_order && order_1[16].order_status != "PEND") {order_1[16] = order; assigned_order = true;}
-            if (!assigned_order && order_1[17].order_status != "PEND") {order_1[17] = order; assigned_order = true;}
-            if (!assigned_order && order_1[18].order_status != "PEND") {order_1[18] = order; assigned_order = true;}
-            if (!assigned_order && order_1[19].order_status != "PEND") {order_1[19] = order; assigned_order = true;}
-            if (!assigned_order) {priority -= 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order1_status[scroller] != "PEND") {assigned_order = true; order1_ordercode[scroller] = submit_ordercode; order1_status[scroller] = "PEND"; order1_primary[scroller] = submit_primary; order1_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order) {priority -= 1; scroller = 0;}
         }
         if (priority == 2)
         {
-            if (!assigned_order && order_2[00].order_status != "PEND") {order_2[00] = order; assigned_order = true;}
-            if (!assigned_order && order_2[01].order_status != "PEND") {order_2[01] = order; assigned_order = true;}
-            if (!assigned_order && order_2[02].order_status != "PEND") {order_2[02] = order; assigned_order = true;}
-            if (!assigned_order && order_2[03].order_status != "PEND") {order_2[03] = order; assigned_order = true;}
-            if (!assigned_order && order_2[04].order_status != "PEND") {order_2[04] = order; assigned_order = true;}
-            if (!assigned_order && order_2[05].order_status != "PEND") {order_2[05] = order; assigned_order = true;}
-            if (!assigned_order && order_2[06].order_status != "PEND") {order_2[06] = order; assigned_order = true;}
-            if (!assigned_order && order_2[07].order_status != "PEND") {order_2[07] = order; assigned_order = true;}
-            if (!assigned_order && order_2[08].order_status != "PEND") {order_2[08] = order; assigned_order = true;}
-            if (!assigned_order && order_2[09].order_status != "PEND") {order_2[09] = order; assigned_order = true;}
-            if (!assigned_order && order_2[10].order_status != "PEND") {order_2[10] = order; assigned_order = true;}
-            if (!assigned_order && order_2[11].order_status != "PEND") {order_2[11] = order; assigned_order = true;}
-            if (!assigned_order && order_2[12].order_status != "PEND") {order_2[12] = order; assigned_order = true;}
-            if (!assigned_order && order_2[13].order_status != "PEND") {order_2[13] = order; assigned_order = true;}
-            if (!assigned_order && order_2[14].order_status != "PEND") {order_2[14] = order; assigned_order = true;}
-            if (!assigned_order && order_2[15].order_status != "PEND") {order_2[15] = order; assigned_order = true;}
-            if (!assigned_order && order_2[16].order_status != "PEND") {order_2[16] = order; assigned_order = true;}
-            if (!assigned_order && order_2[17].order_status != "PEND") {order_2[17] = order; assigned_order = true;}
-            if (!assigned_order && order_2[18].order_status != "PEND") {order_2[18] = order; assigned_order = true;}
-            if (!assigned_order && order_2[19].order_status != "PEND") {order_2[19] = order; assigned_order = true;}
-            if (!assigned_order) {priority -= 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order2_status[scroller] != "PEND") {assigned_order = true; order2_ordercode[scroller] = submit_ordercode; order2_status[scroller] = "PEND"; order2_primary[scroller] = submit_primary; order2_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order) {priority -= 1; scroller = 0;}
         }
         if (priority == 3)
         {
-            if (!assigned_order && order_3[00].order_status != "PEND") {order_3[00] = order; assigned_order = true;}
-            if (!assigned_order && order_3[01].order_status != "PEND") {order_3[01] = order; assigned_order = true;}
-            if (!assigned_order && order_3[02].order_status != "PEND") {order_3[02] = order; assigned_order = true;}
-            if (!assigned_order && order_3[03].order_status != "PEND") {order_3[03] = order; assigned_order = true;}
-            if (!assigned_order && order_3[04].order_status != "PEND") {order_3[04] = order; assigned_order = true;}
-            if (!assigned_order && order_3[05].order_status != "PEND") {order_3[05] = order; assigned_order = true;}
-            if (!assigned_order && order_3[06].order_status != "PEND") {order_3[06] = order; assigned_order = true;}
-            if (!assigned_order && order_3[07].order_status != "PEND") {order_3[07] = order; assigned_order = true;}
-            if (!assigned_order && order_3[08].order_status != "PEND") {order_3[08] = order; assigned_order = true;}
-            if (!assigned_order && order_3[09].order_status != "PEND") {order_3[09] = order; assigned_order = true;}
-            if (!assigned_order && order_3[10].order_status != "PEND") {order_3[10] = order; assigned_order = true;}
-            if (!assigned_order && order_3[11].order_status != "PEND") {order_3[11] = order; assigned_order = true;}
-            if (!assigned_order && order_3[12].order_status != "PEND") {order_3[12] = order; assigned_order = true;}
-            if (!assigned_order && order_3[13].order_status != "PEND") {order_3[13] = order; assigned_order = true;}
-            if (!assigned_order && order_3[14].order_status != "PEND") {order_3[14] = order; assigned_order = true;}
-            if (!assigned_order && order_3[15].order_status != "PEND") {order_3[15] = order; assigned_order = true;}
-            if (!assigned_order && order_3[16].order_status != "PEND") {order_3[16] = order; assigned_order = true;}
-            if (!assigned_order && order_3[17].order_status != "PEND") {order_3[17] = order; assigned_order = true;}
-            if (!assigned_order && order_3[18].order_status != "PEND") {order_3[18] = order; assigned_order = true;}
-            if (!assigned_order && order_3[19].order_status != "PEND") {order_3[19] = order; assigned_order = true;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
+            if (!assigned_order && order3_status[scroller] != "PEND") {assigned_order = true; order3_ordercode[scroller] = submit_ordercode; order3_status[scroller] = "PEND"; order3_primary[scroller] = submit_primary; order3_secondary[scroller] = submit_secondary;} else {scroller += 1;}
             if (!assigned_order) {Debug.Log("Was not able to be assigned");}
+        }
+
+        if (assigned_order)
+        {
+            current_orderlist = 1; 
+            selected_orderlist_1 = 0;
+            selected_orderlist_2 = 0;
+            selected_orderlist_3 = 0;
+            return true;
+            
+        } else
+        {
+            return false;
         }
     }
 
@@ -125,11 +156,31 @@ public class DroneOrderer : MonoBehaviour
 
             if (current_orderlist == 1)
             {
-                if (order_1[selected_orderlist_1].order_status == "PEND")
+                if (order1_status[selected_orderlist_1] == "PEND")
                 {
-                    Debug.Log("Found Order");
-                    making_selection = true;
-                    current_order = order_1[selected_orderlist_1];
+
+                    Debug.Log("Is it pending in slot 1");
+
+                    if (order1_primary[selected_orderlist_1] == null || order1_secondary[selected_orderlist_1] == null)
+                    {
+                        Debug.Log("This is null");
+                        order1_primary[selected_orderlist_1] = null;
+                        order1_secondary[selected_orderlist_1] = null;
+                        order1_status[selected_orderlist_1] = "";
+                        order1_ordercode[selected_orderlist_1] = "";
+                        current_orderlist = 1; 
+                        selected_orderlist_1 = 0;
+                        selected_orderlist_2 = 0;
+                        selected_orderlist_3 = 0;
+                    } else
+                    {
+                        Debug.Log("Found Order");
+                        making_selection = true;
+                        current_ordercode = order1_ordercode[selected_orderlist_1];
+                        current_primary = order1_primary[selected_orderlist_1];
+                        current_secondary = order1_secondary[selected_orderlist_1];
+                        current_status = order1_status[selected_orderlist_1];
+                    }
 
                 } else
                 {
@@ -147,11 +198,27 @@ public class DroneOrderer : MonoBehaviour
 
             if (current_orderlist == 2)
             {
-                if (order_2[selected_orderlist_2].order_status == "PEND")
+                if (order2_status[selected_orderlist_2] == "PEND")
                 {
-                    Debug.Log("Found Order");
-                    making_selection = true;
-                    current_order = order_2[selected_orderlist_2];
+                    if (order2_primary[selected_orderlist_2] == null || order2_secondary[selected_orderlist_2] == null)
+                    {
+                        order2_primary[selected_orderlist_2] = null;
+                        order2_secondary[selected_orderlist_2] = null;
+                        order2_status[selected_orderlist_2] = "";
+                        order2_ordercode[selected_orderlist_2] = "";
+                        current_orderlist = 1; 
+                        selected_orderlist_1 = 0;
+                        selected_orderlist_2 = 0;
+                        selected_orderlist_3 = 0;
+                    } else
+                    {
+                        Debug.Log("Found Order");
+                        making_selection = true;
+                        current_ordercode = order2_ordercode[selected_orderlist_2];
+                        current_primary = order2_primary[selected_orderlist_2];
+                        current_secondary = order2_secondary[selected_orderlist_2];
+                        current_status = order2_status[selected_orderlist_2];
+                    }
 
                 } else
                 {
@@ -169,11 +236,27 @@ public class DroneOrderer : MonoBehaviour
 
             if (current_orderlist == 3)
             {
-                if (order_3[selected_orderlist_3].order_status == "PEND")
+                if (order3_status[selected_orderlist_3] == "PEND")
                 {
-                    Debug.Log("Found Order");
-                    making_selection = true;
-                    current_order = order_3[selected_orderlist_3];
+                    if (order3_primary[selected_orderlist_3] == null || order3_secondary[selected_orderlist_3] == null)
+                    {
+                        order3_primary[selected_orderlist_3] = null;
+                        order3_secondary[selected_orderlist_3] = null;
+                        order3_status[selected_orderlist_3] = "";
+                        order3_ordercode[selected_orderlist_3] = "";
+                        current_orderlist = 1; 
+                        selected_orderlist_1 = 0;
+                        selected_orderlist_2 = 0;
+                        selected_orderlist_3 = 0;
+                    } else
+                    {
+                        Debug.Log("Found Order");
+                        making_selection = true;
+                        current_ordercode = order3_ordercode[selected_orderlist_3];
+                        current_primary = order3_primary[selected_orderlist_3];
+                        current_secondary = order3_secondary[selected_orderlist_3];
+                        current_status = order3_status[selected_orderlist_3];
+                    }
 
                 } else
                 {
@@ -195,31 +278,67 @@ public class DroneOrderer : MonoBehaviour
 
             if (bot_list[selected_bot] != null)
             {
-                making_selection = bot_list[selected_bot].GetComponent<Drone>().RequestedOrder(current_order);
+                making_selection = bot_list[selected_bot].GetComponent<Drone>().RequestedOrder(current_ordercode, current_primary, current_secondary, current_status);
+            
+                if (current_primary == null || current_secondary == null)
+                {
+                    if (current_orderlist == 1)
+                    {
+                        order1_primary[selected_orderlist_1] = null;
+                        order1_secondary[selected_orderlist_1] = null;
+                        order1_status[selected_orderlist_1] = "";
+                        order1_ordercode[selected_orderlist_1] = "";
+                    }
+                    if (current_orderlist == 2)
+                    {
+                        order2_primary[selected_orderlist_2] = null;
+                        order2_secondary[selected_orderlist_2] = null;
+                        order2_status[selected_orderlist_2] = "";
+                        order2_ordercode[selected_orderlist_2] = "";
+                    }
+                    if (current_orderlist == 3)
+                    {
+                        order3_primary[selected_orderlist_3] = null;
+                        order3_secondary[selected_orderlist_3] = null;
+                        order3_status[selected_orderlist_3] = "";
+                        order3_ordercode[selected_orderlist_3] = "";
+                    }
+                    current_orderlist = 1; 
+                    selected_orderlist_1 = 0;
+                    selected_orderlist_2 = 0;
+                    selected_orderlist_3 = 0;
+                }
             }
 
             if (!making_selection)
             {
                 avaliable_bots -= 1;
-                current_order.order_status = "ASSI";
+                current_status = "ASSI";
+
+                if (current_orderlist == 1)
+                {
+                    order1_status[selected_orderlist_1] = "ASSI";
+                }
+                if (current_orderlist == 2)
+                {
+                    order2_status[selected_orderlist_2] = "ASSI";
+                }
+                if (current_orderlist == 3)
+                {
+                    order3_status[selected_orderlist_3] = "ASSI";
+                }
 
                 current_orderlist = 1; 
                 selected_orderlist_1 = 0;
                 selected_orderlist_2 = 0;
                 selected_orderlist_3 = 0;
 
-                if (current_orderlist == 1)
-                {
-                    order_1[selected_orderlist_1].order_status = "ASSI";
-                }
-                if (current_orderlist == 2)
-                {
-                    order_2[selected_orderlist_2].order_status = "ASSI";
-                }
-                if (current_orderlist == 3)
-                {
-                    order_3[selected_orderlist_3].order_status = "ASSI";
-                }
+                making_selection = false;
+            }
+
+            if (current_primary == null || current_secondary == null)
+            {
+                making_selection = false;
             }
         }
     }
