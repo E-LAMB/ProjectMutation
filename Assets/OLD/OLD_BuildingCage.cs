@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
 public class BuildingCage : MonoBehaviour
 {
 
@@ -43,7 +44,7 @@ public class BuildingCage : MonoBehaviour
 
         if (waste_inside < (waste_storage - waste_enroute) && waste_item != null && waste_to_remove == 0)
         {
-            order_submitted = my_orderer.AddOrder("HAUL/WAST/CAGE", waste_item, self, 3);
+            order_submitted = my_orderer.AddOrder("HAUL/WAST/CAGE", waste_item, self);
             if (order_submitted)
             {
                 waste_item.GetComponent<BuildingIdentity>().should_be_ignored = true;
@@ -61,9 +62,8 @@ public class BuildingCage : MonoBehaviour
             waste_to_remove = waste_storage;
             order_submitted = my_orderer.AddOrder("OPER/CAGE", self, self, 3);
         }
-        */
 
 
     }
 }
-
+*/

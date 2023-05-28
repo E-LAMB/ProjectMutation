@@ -7,19 +7,25 @@ public class Drone : MonoBehaviour
 {
 
     public bool able_to_select;
-    public int my_place;
-
     public int stage;
-    // 0 - Awaiting Order
+    // -1 : Completed Order
+    // -2 : Dusting Self
+    // -3 : Requesting and Awaiting Charge
+    // 0 : Awaiting Order
 
     public Transform self;
     public NavMeshAgent agent;
 
     public float my_battery;
+    // Drones will call over a Charger Unit if there is one avaliable at 50% battery.
     // Low power mode is 40%. During this, A 20% speed reduction is applied.
     // At 0%, This drone becomes disfunctional.
 
-    public DroneOrderer my_orderer;
+    public float my_dust;
+    // Drones will visit maintenance whenever they become Dirty 
+    // At below 80%, The Drone becomes Dirty. During this, A 5% speed reduction is applied.
+    // At below 30%, The Drone becomes Weakened. During this, A 40% speed reduction is applied.
+    // At 0%, The Drone becomes disfunctional.
 
     public string mine_ordercode;
     public GameObject mine_primary;
@@ -75,12 +81,10 @@ public class Drone : MonoBehaviour
     void Start()
     {
         agent.enabled = false;
-        my_place = Mind.drone_ID_startup;
-        Mind.drone_ID_startup += 1;
         able_to_select = true;
-        my_orderer.bot_list[my_place] = gameObject;
-        my_orderer.avaliable_bots += 1;
         ChangeItem("Empty");
+        my_battery = 100f;
+        my_dust = 100f;
     }
 
     void ChangeItem(string new_item)
@@ -110,150 +114,44 @@ public class Drone : MonoBehaviour
         mine_primary = null;
         mine_secondary = null;
         mine_status = "";
-        stage = 0;
-        able_to_select = true;
-        my_orderer.avaliable_bots += 1;
+        stage = -1;
         agent.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (stage == -1)
+        {
+
+            if (my_battery < 50f)
+            {
+                stage = -3;
+
+            } else if (my_dust < 50f)
+            {
+                stage = -2;
+
+            } else 
+            {
+                stage = 0;
+                able_to_select = true;
+            }
+        }
+
         if (mine_ordercode == "HAUL/RADO/REAC")
         {
             if (stage == 1)
             {
-                if (mine_primary == null) 
-                {
-                    mine_secondary.GetComponent<BuildingReactor>().fuel_enroute -= 1;
-                    ChangeItem("Empty");
-                    CompleteTask();
-                } else 
-                {
-                    objective_distance = Vector3.Distance(mine_primary.transform.position, self.position);
-                    agent.SetDestination(mine_primary.transform.position);
-                    if (0.25f > objective_distance)
-                    {
-                        stage = 2;
-                        Destroy(mine_primary);
-                        ChangeItem("RadioactiveOre");
-                    }
-                }
 
             }
             if (stage == 2)
             {
-                objective_distance = Vector3.Distance(mine_secondary.GetComponent<BuildingReactor>().interaction_point.transform.position, self.position);
-                agent.SetDestination(mine_secondary.GetComponent<BuildingReactor>().interaction_point.transform.position);
-                if (0.25f > objective_distance)
-                {
-                    mine_secondary.GetComponent<BuildingReactor>().fuel_enroute -= 1;
-                    mine_secondary.GetComponent<BuildingReactor>().fuel_inside += 1;
-                    ChangeItem("Empty");
-                    CompleteTask();
-                }
-            }
-        }
-
-        if (mine_ordercode == "HAUL/WATE/REAC")
-        {
-            if (stage == 1)
-            {
-                if (mine_primary == null) 
-                {
-                    mine_secondary.GetComponent<BuildingReactor>().water_enroute -= 1;
-                    ChangeItem("Empty");
-                    CompleteTask();
-                } else 
-                {
-                    objective_distance = Vector3.Distance(mine_primary.transform.position, self.position);
-                    agent.SetDestination(mine_primary.transform.position);
-                    if (0.25f > objective_distance)
-                    {
-                        stage = 2;
-                        Destroy(mine_primary);
-                        ChangeItem("Water");
-                    }
-                }
-            }
-            if (stage == 2)
-            {
-                objective_distance = Vector3.Distance(mine_secondary.GetComponent<BuildingReactor>().interaction_point.transform.position, self.position);
-                agent.SetDestination(mine_secondary.GetComponent<BuildingReactor>().interaction_point.transform.position);
-                if (0.25f > objective_distance)
-                {
-                    mine_secondary.GetComponent<BuildingReactor>().water_enroute -= 1;
-                    mine_secondary.GetComponent<BuildingReactor>().water_inside += 1;
-                    ChangeItem("Empty");
-                    CompleteTask();
-                }
-            }
-        }
-
-        if (mine_ordercode == "HAUL/WAST/CAGE")
-        {
-            if (stage == 1)
-            {
-                if (mine_primary == null) 
-                {
-                    mine_secondary.GetComponent<BuildingCage>().waste_enroute -= 1;
-                    ChangeItem("Empty");
-                    CompleteTask();
-                } else 
-                {
-                    objective_distance = Vector3.Distance(mine_primary.transform.position, self.position);
-                    agent.SetDestination(mine_primary.transform.position);
-                    if (0.25f > objective_distance)
-                    {
-                        stage = 2;
-                        Destroy(mine_primary);
-                        ChangeItem("Waste");
-                    }
-                }
-            }
-            if (stage == 2)
-            {
-                objective_distance = Vector3.Distance(mine_secondary.GetComponent<BuildingCage>().interaction_point.transform.position, self.position);
-                agent.SetDestination(mine_secondary.GetComponent<BuildingCage>().interaction_point.transform.position);
-                if (0.25f > objective_distance)
-                {
-                    mine_secondary.GetComponent<BuildingCage>().waste_enroute -= 1;
-                    mine_secondary.GetComponent<BuildingCage>().waste_inside += 1;
-                    ChangeItem("Empty");
-                    CompleteTask();
-                }
-            }
-        }
-
-
-        if (mine_ordercode == "OPER/CAGE")
-        {
-            if (stage == 1)
-            {
-                objective_distance = Vector3.Distance(mine_primary.GetComponent<BuildingCage>().interaction_point.transform.position, self.position);
-                agent.SetDestination(mine_primary.GetComponent<BuildingCage>().interaction_point.transform.position);
-                if (0.25f > objective_distance)
-                {
-                    stage = 2;
-                    objective_distance = 0f;
-                    agent.SetDestination(self.position);
-                }
-            }
-            if (stage == 2)
-            {
-                objective_distance += Time.deltaTime;
-                if (mine_primary.GetComponent<BuildingCage>().waste_to_remove > 0 && objective_distance > 2f)
-                {
-                    mine_primary.GetComponent<BuildingCage>().waste_to_remove -= 1;
-                    mine_primary.GetComponent<BuildingCage>().waste_inside -= 1;
-                    objective_distance = 0f;
-                }
                 
-                if (3f <= objective_distance)
-                {
-                    CompleteTask();
-                }
             }
         }
+
+
     }
 }
