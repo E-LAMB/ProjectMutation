@@ -53,7 +53,11 @@ public class Train : MonoBehaviour
     {
         if (state == 0)
         {
-            wait_time = 0f;
+            wait_time -= 3f;
+            if (0f > wait_time)
+            {
+                wait_time = 0f;
+            }
         }
     }
 
