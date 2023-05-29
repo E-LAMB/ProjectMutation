@@ -30,16 +30,16 @@ public class Drone : MonoBehaviour
     public string mine_ordercode;
     public GameObject mine_primary;
     public GameObject mine_secondary;
-    public string mine_status;
 
     public float objective_distance;
+    public float operate_time;
 
     public string item_in_hand;
     public GameObject[] items;
     public GameObject open_hand;
     public GameObject close_hand;
 
-    public bool RequestedOrder(string proposed_ordercode, GameObject proposed_primary, GameObject proposed_secondary, string proposed_status)
+    public bool RequestedOrder(string proposed_ordercode, GameObject proposed_primary, GameObject proposed_secondary)
     {
 
         if (proposed_primary == null)
@@ -51,7 +51,12 @@ public class Drone : MonoBehaviour
             return true;
         }
 
-        if (Vector3.Distance(proposed_primary.transform.position, self.position) > 60f)
+        if (Vector3.Distance(proposed_primary.transform.position, self.position) > 40f)
+        {
+            return true;
+        }
+
+        if (Vector3.Distance(proposed_secondary.transform.position, self.position) > 40f)
         {
             return true;
         }
@@ -69,7 +74,6 @@ public class Drone : MonoBehaviour
         mine_ordercode = proposed_ordercode;
         mine_primary = proposed_primary;
         mine_secondary = proposed_secondary;
-        mine_status = "PEND";
         able_to_select = false;
         stage = 1;
         agent.enabled = true; 
@@ -113,7 +117,6 @@ public class Drone : MonoBehaviour
         mine_ordercode = "";
         mine_primary = null;
         mine_secondary = null;
-        mine_status = "";
         stage = -1;
         agent.enabled = false;
     }
@@ -140,18 +143,161 @@ public class Drone : MonoBehaviour
             }
         }
 
-        if (mine_ordercode == "HAUL/RADO/REAC")
+        if (stage == -2)
         {
-            if (stage == 1)
+            my_dust += Time.deltaTime * 10f;
+            if (my_dust > 100f)
             {
-
-            }
-            if (stage == 2)
-            {
-                
+                my_dust = 100f;
+                stage = -1;
             }
         }
 
+        if (stage == -3)
+        {
+            my_battery += Time.deltaTime * 20f;
+            if (my_battery > 100f)
+            {
+                my_battery = 100f;
+                stage = -1;
+            }
+        }
+
+        // --------- tasks --------- //
+
+        if (mine_ordercode == "HAUL")
+        {
+
+            // 1 = Locate item and go to it. Collect it upon getting close enough.
+            // 2 = Go to the dropoff point. Deposit it upon getting close enough.
+
+            if (stage == 1)
+            {
+                objective_distance = Vector3.Distance(self.position, mine_primary.transform.position);
+                agent.SetDestination(mine_primary.transform.position);
+                if (0.5f > objective_distance)
+                {
+                    string identity = mine_primary.GetComponent<BuildingIdentity>().my_identity;
+
+                    if (identity == "Water") {ChangeItem("Water");}
+                    if (identity == "Coal") {ChangeItem("Coal");}
+                    if (identity == "Waste") {ChangeItem("Waste");}
+                    if (identity == "RadioactiveOre") {ChangeItem("RadioactiveOre");}
+
+                    Destroy(mine_primary);
+                    stage = 2;
+                }
+            }
+            if (stage == 2)
+            {
+                objective_distance = Vector3.Distance(self.position, mine_secondary.transform.position);
+                agent.SetDestination(mine_secondary.transform.position);
+                if (0.5f > objective_distance)
+                {
+
+                    if (item_in_hand == "Coal" && mine_secondary.GetComponent<CoalBurner>()) 
+                    {
+                        mine_secondary.GetComponent<CoalBurner>().coal_enroute -= 1;
+                        mine_secondary.GetComponent<CoalBurner>().coal_inside += 1;
+                        ChangeItem("Empty");
+                    }
+
+                    if (item_in_hand == "Water" && mine_secondary.GetComponent<NuclearReactor>()) 
+                    {
+                        mine_secondary.GetComponent<NuclearReactor>().water_enroute -= 1;
+                        mine_secondary.GetComponent<NuclearReactor>().water_stored += 1;
+                        ChangeItem("Empty");
+                    }
+
+                    if (item_in_hand == "RadioactiveOre" && mine_secondary.GetComponent<NuclearReactor>()) 
+                    {
+                        mine_secondary.GetComponent<NuclearReactor>().fuel_enroute -= 1;
+                        mine_secondary.GetComponent<NuclearReactor>().fuel_stored += 1;
+                        ChangeItem("Empty");
+                    }
+
+                    if (item_in_hand == "Waste" && mine_secondary.GetComponent<RadiationCage>()) 
+                    {
+                        mine_secondary.GetComponent<RadiationCage>().waste_enroute -= 1;
+                        mine_secondary.GetComponent<RadiationCage>().waste_inside += 1;
+                        ChangeItem("Empty");
+                    }
+                    
+                    if (item_in_hand == "Coal" && mine_secondary.GetComponent<StationLoader>()) 
+                    {
+                        mine_secondary.GetComponent<StationLoader>().coal_enroute -= 1;
+                        mine_secondary.GetComponent<StationLoader>().items_coal += 1;
+                        ChangeItem("Empty");
+                    }
+
+                    if (item_in_hand == "Water" && mine_secondary.GetComponent<StationLoader>()) 
+                    {
+                        mine_secondary.GetComponent<StationLoader>().water_enroute -= 1;
+                        mine_secondary.GetComponent<StationLoader>().items_water += 1;
+                        ChangeItem("Empty");
+                    }
+
+                    if (item_in_hand == "Waste" && mine_secondary.GetComponent<StationLoader>()) 
+                    {
+                        mine_secondary.GetComponent<StationLoader>().waste_enroute -= 1;
+                        mine_secondary.GetComponent<StationLoader>().items_waste += 1;
+                        ChangeItem("Empty");
+                    }
+
+                    if (item_in_hand == "RadioactiveOre" && mine_secondary.GetComponent<StationLoader>()) 
+                    {
+                        mine_secondary.GetComponent<StationLoader>().radioactiveore_enroute -= 1;
+                        mine_secondary.GetComponent<StationLoader>().items_radioactive_ore += 1;
+                        ChangeItem("Empty");
+                    }
+
+                    CompleteTask();
+                }
+            }
+        }
+
+        if (mine_ordercode == "OPERATE/10")
+        {
+            operate_time = 10f;
+            mine_ordercode = "OPERATE";
+        }
+        if (mine_ordercode == "OPERATE/5")
+        {
+            operate_time = 5f;
+            mine_ordercode = "OPERATE";
+        }
+
+        if (mine_ordercode == "OPERATE")
+        {
+
+            // 1 = Go to the space.
+            // 2 = Once at the space, Wait for the timer to elapse. Then deem task as complete.
+
+            if (stage == 1)
+            {
+                objective_distance = Vector3.Distance(self.position, mine_primary.transform.position);
+                agent.SetDestination(mine_primary.transform.position);
+                if (0.5f > objective_distance)
+                {
+                    stage = 2;
+                }
+            }
+            if (stage == 2)
+            {
+                operate_time -= Time.deltaTime;
+                agent.SetDestination(mine_primary.transform.position);
+                if (0f > operate_time)
+                {
+
+                    if (mine_primary.GetComponent<RadiationCage>()) 
+                    {
+                        mine_secondary.GetComponent<RadiationCage>().Operated();
+                    }
+
+                    CompleteTask();
+                }
+            }
+        }
 
     }
 }

@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 1029014629401654749}
   - component: {fileID: 5762998172431983417}
   - component: {fileID: -2421237564466227219}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Coal Chunk
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

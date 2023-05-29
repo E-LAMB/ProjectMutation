@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 5229983169422182167}
   - component: {fileID: 5229983169422182166}
   - component: {fileID: 6789134263293410606}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Radioactive Ore
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -7,6 +7,10 @@ public class Train : MonoBehaviour
 
     public int items_coal;
     public int items_water;
+    public int items_radioactive_ore;
+    public int items_waste;
+
+    public int items_inside;
 
     public bool has_space;
 
@@ -37,6 +41,7 @@ public class Train : MonoBehaviour
     public Vector3 speed_to_loader;
 
     public float distance_to_destination;
+    public float final_waiting;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +61,8 @@ public class Train : MonoBehaviour
     void Update()
     {
 
+        items_inside = items_coal + items_water + items_waste + items_radioactive_ore;
+
         orb_object.SetActive(accepting_charge);
 
         if (state == 0)
@@ -63,7 +70,7 @@ public class Train : MonoBehaviour
             accepting_items = true;
             wait_time += Time.deltaTime;
 
-            if ((items_coal + items_water) > 47)
+            if (items_inside > 47)
             {
                 has_space = false;
             } else
@@ -71,11 +78,7 @@ public class Train : MonoBehaviour
                 has_space = true;
             }
 
-            if (loader_empty && (items_coal + items_water) > 9 && wait_time > 3f)
-            {
-                state = 1;
-            }
-            if (wait_time > 30f)
+            if (wait_time > 20f)
             {
                 state = 1;
             }
@@ -90,10 +93,11 @@ public class Train : MonoBehaviour
             accepting_items = false;
             distance_to_destination = Vector3.Distance(self.position, unloader_position.position);
             self.position += speed_to_loader * Time.deltaTime;
-            if (distance_to_destination < 1.2f)
+            if (distance_to_destination < 0.5f)
             {
                 state = 2;
                 wait_time = 0f;
+                final_waiting = 0f;
             }
         }
 
@@ -112,10 +116,20 @@ public class Train : MonoBehaviour
                 {
                     items_water -= 1;
                     my_unloader.Unloader("WATER");
+                } else if (items_waste > 0)
+                {
+                    items_waste -= 1;
+                    my_unloader.Unloader("WASTE");
+                } else if (items_radioactive_ore > 0)
+                {
+                    items_radioactive_ore -= 1;
+                    my_unloader.Unloader("RADIOACTIVEORE");
                 }
             }
 
-            if (items_coal == 0 && items_water == 0)
+            final_waiting += Time.deltaTime;
+
+            if (items_inside == 0 && final_waiting > 10f)
             {
                 state = 3;
                 speed_to_loader.x = speed_to_loader.x * -1f;
@@ -128,24 +142,15 @@ public class Train : MonoBehaviour
         {
             distance_to_destination = Vector3.Distance(self.position, loader_position.position);
             self.position += speed_to_loader * Time.deltaTime;
-            if (distance_to_destination < 1.2f)
-            {
-                state = 4;
-                wait_time = 0f;
-                accepting_charge = true;
-            }
-        }
-
-        if (state == 4)
-        {
-            if (wait_time > 25f)
+            if (distance_to_destination < 0.5f)
             {
                 state = 0;
-                accepting_charge = false;
+                wait_time = 0f;
                 speed_to_loader.x = speed_to_loader.x * -1f;
                 speed_to_loader.y = speed_to_loader.y * -1f;
                 speed_to_loader.z = speed_to_loader.z * -1f;
             }
         }
+
     }
 }

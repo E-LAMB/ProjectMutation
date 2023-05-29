@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 114535392338578994}
   m_Layer: 7
   m_Name: Drone
-  m_TagString: Untagged
+  m_TagString: Drone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -194,16 +194,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   able_to_select: 0
-  my_place: 0
   stage: 0
   self: {fileID: 114535392338579002}
   agent: {fileID: 114535392338579005}
   my_battery: 60
-  my_orderer: {fileID: 0}
+  my_dust: 0
   mine_ordercode: 
   mine_primary: {fileID: 0}
   mine_secondary: {fileID: 0}
-  mine_status: 
   objective_distance: 0
   item_in_hand: 
   items:
